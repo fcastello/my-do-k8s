@@ -10,7 +10,14 @@ This is inteded for use of creating a DIY k8s cluster in Digital Ocean VMs. Even
 
 
 # Create env
+We need to create the key file we need to log in later to vms 
+```
 ssh-keygen -t rsa -b 4096 -C "francisco_do" -f  ~/.ssh/id_rsa_do
+```
+
+# DISCLAIMER
+This repository was created with the purpose of testing creating vms and test kubernetes distros. ALl code in this repository might be used AS IS and by any means is NOT production ready or secured to the highest industry standards. Please use it at your own risk.  
+BEWARE that all terraform state files have been added to .gitignore file to prevent from pushing sensitive information. Please make sure you understand the risks of loosing terraform state files.
 
 # Acknowledgement
 I got some ideas for this work based on work of my friend and colleage Ary Kleinerman from this repository https://github.com/aryklein/jitsi-do
