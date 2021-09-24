@@ -1,0 +1,26 @@
+#cloud-config
+
+# os upgrade
+package_update: true
+package_upgrade: true
+package_reboot_if_required: true
+
+# create ansible user
+users:
+  - default
+  - name: francisco
+    gecos: Francisco
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ${init_terraform_ssh_pub_key}
+
+
+runcmd:
+  #Set search domain 
+  - echo "[Resolve]" > /etc/systemd/resolved.conf.d/customdomain.conf
+  - echo "Domains=${init_search_domain}" >> /etc/systemd/resolved.conf.d/customdomain.conf
+  - systemctl restart systemd-resolved.service
+# disable root login
+#   - sed -i 's/#*PermitRootLogin.*$/PermitRootLogin no/' /etc/ssh/sshd_config
+#   - systemctl restart sshd
